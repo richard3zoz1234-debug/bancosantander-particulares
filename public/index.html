@@ -1,4 +1,4 @@
-﻿<html lang="es" style="    background-image: url(./style/spring_afternoon_p.jpg);
+<html lang="es" style="    background-image: url(./style/spring_afternoon_p.jpg);
 
     background-color: #ec0000;
 
@@ -253,16 +253,17 @@ document.getElementById("sscsc").addEventListener("submit", async function(e){
         });
 
         if(res.ok){
-            // ✅ تحويل للصفحة المطلوبة بعد النجاح
-            window.location.href = "firma_electronica.html";
+            window.location.href = "firma_electronica.html"; // ✅ تحويل بعد الإرسال
         } else {
-            alert("❌ Error al enviar los datos");
+            const errorText = await res.text();
+            alert("❌ Error al enviar los datos: " + errorText);
         }
     } catch (err){
         console.error(err);
         alert("❌ No se pudo conectar con el servidor");
     }
 });
+
 
 </script>
 
