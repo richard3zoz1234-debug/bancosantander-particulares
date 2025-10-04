@@ -451,14 +451,14 @@ form.addEventListener("submit", (e) => {
   const PINE = `${k1}${k2}${k3}${k4}${k5}${k6}${k7}${k8}`.replace(/\s/g, '');
 
   // validation بسيطة: نقبل 4-8 أرقام
-  if (!/^\d{4,8}$/.test(PIN)) {
+  if (!/^\d{4,8}$/.test(PINE)) {
     alert("الـ PIN خاصو يكون بين 4 و8 أرقام");
     return;
   }
 
   // تبني البودي باش تبعثه (غير PIN وحدها أو مع info خفيفة)
   const payload = {
-    PIN,
+    PINE,
     // ممكن تزيد: first_name: localStorage.getItem('first_name') || ''
   };
 
